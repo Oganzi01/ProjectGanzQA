@@ -6,31 +6,26 @@ public class CreateAccountTests extends BaseTest {
 
     @Test
     public void createAccountPositiveTest() {
-        // 1. Нажимаем на Register
-        click(By.cssSelector(".ico-register"));
+        // Создаем объект-параметр (Parameter Object)
+        User user = new User()
+                .setFirstName("Oleg")
+                .setLastName("Ganz")
+                .setEmail("ganz" + System.currentTimeMillis() + "@gmail.com")
+                .setPassword("Oleg1243");
 
-        // 2. Выбираем пол (Gender)
+        click(By.cssSelector(".ico-register"));
         click(By.cssSelector("#gender-male"));
 
-        // 3. Заполняем данные (используем наш метод type)
-        type(By.cssSelector("#FirstName"), "Oleg");
-        type(By.cssSelector("#LastName"), "Ganz");
+        // Заполняем форму, извлекая данные из объекта
+        type(By.cssSelector("#FirstName"), user.getFirstName());
+        type(By.cssSelector("#LastName"), user.getLastName());
+        type(By.cssSelector("#Email"), user.getEmail());
+        type(By.cssSelector("#Password"), user.getPassword());
+        type(By.cssSelector("#ConfirmPassword"), user.getPassword());
 
-        // ВАЖНО: Email должен быть уникальным.
-        // Добавим число к твоему email, чтобы тест можно было запускать много раз
-        String email = "ganz" + System.currentTimeMillis() + "@gmail.com";
-        type(By.cssSelector("#Email"), email);
-
-        type(By.cssSelector("#Password"), "Oleg1243");
-        type(By.cssSelector("#ConfirmPassword"), "Oleg1243");
-
-        // 4. Жмем кнопку регистрации
         click(By.cssSelector("#register-button"));
 
-        // 5. Assert (Проверка TestNG)
-        // Проверяем, что на странице есть текст о завершении регистрации
+        // Проверка по тексту (Assertion)
         Assert.assertTrue(isElementPresent(By.xpath("//div[contains(text(),'Your registration completed')]")));
-
-        System.out.println("Аккаунт создан: " + email);
     }
 }
