@@ -2,7 +2,7 @@ plugins {
     id 'java'
 }
 
-group = 'com.ganz'
+group = 'org.ganz'
 version = '1.0-SNAPSHOT'
 
 repositories {
@@ -10,26 +10,33 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.seleniumhq.selenium:selenium-java:4.25.0'
-    implementation 'org.testng:testng:7.10.2'
-    // Эта штука сама скачает драйверы под твой браузер
+    // Драйверы для браузеров
     implementation 'io.github.bonigarcia:webdrivermanager:5.9.2'
-    implementation 'org.slf4j:slf4j-simple:2.0.7'
+
+    // Selenium (нужен в основном коде для хелперов)
+    implementation 'org.seleniumhq.selenium:selenium-java:4.21.0'
+
+    // TestNG (теперь правильно — для папки src/test)
+    testImplementation 'org.testng:testng:7.10.2'
+
+    // Блок логирования (Лесоруб)
+    implementation 'org.slf4j:slf4j-api:2.0.9'
+    implementation 'ch.qos.logback:logback-classic:1.4.11'
+    implementation 'ch.qos.logback:logback-core:1.4.11'
 }
 
 test {
     useTestNG()
+    testLogging {
+        showStandardStreams = true
+        exceptionFormat = 'full'
+    }
 }
 
+// Задача для запуска через терминал (если понадобится)
 task qa(type: Test) {
-    group = "verification"
-    testClassesDirs = sourceSets.test.output.classesDirs
-    classpath = sourceSets.test.runtimeClasspath
-
+    group = 'verification'
     useTestNG()
-
-    // Прокидываем параметр браузера из консоли в Java-код
-    if (project.hasProperty('browser')) {
-        systemProperty 'browser', "${browser}"
-    }
+    outputs.upToDateWhen { false }
+    systemProperty "browser", System.getProperty("browser", "chrome")
 }

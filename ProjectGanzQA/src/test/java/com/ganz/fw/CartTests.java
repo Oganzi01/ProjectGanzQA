@@ -1,33 +1,36 @@
 package com.ganz.fw;
 
-import com.ganz.core.BaseHelper;
+import com.ganz.core.BaseHelper; // ЭТА СТРОКА УБЕРЕТ КРАСНЫЙ ЦВЕТ
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class ItemHelper extends BaseHelper {
-    public ItemHelper(WebDriver driver) {
+public class CartTests extends BaseHelper {
+
+    public CartTests(WebDriver driver) {
         super(driver);
     }
 
     public void openItemByUrl(String itemUrl) {
         driver.get(itemUrl);
-        // Небольшая пауза, чтобы JS на странице успел отработать
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
     public void addToCart() {
         click(By.cssSelector(".add-to-cart-button"));
     }
 
+    public void addToCartGeneral() {
+        addToCart();
+    }
+
     public void setQuantity(String qty) {
         type(By.className("qty-input"), qty);
     }
 
-    public void openShoppingCart() {
+    public void openCart() {
         click(By.className("ico-cart"));
+    }
+
+    public void openShoppingCart() {
+        openCart();
     }
 }

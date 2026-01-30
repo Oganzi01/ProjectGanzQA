@@ -5,22 +5,38 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class UserHelper extends BaseHelper {
+
     public UserHelper(WebDriver driver) {
         super(driver);
     }
 
+    public void clickOnRegistrationLink() {
+        click(By.className("ico-register"));
+    }
+
     public void fillRegistrationForm(User user) {
-        type(By.id("FirstName"), user.getFirstName());
-        type(By.id("LastName"), user.getLastName());
+        click(By.id("gender-male"));
+        type(By.id("FirstName"), "Oleg");
+        type(By.id("LastName"), "Ganz");
         type(By.id("Email"), user.getEmail());
         type(By.id("Password"), user.getPassword());
         type(By.id("ConfirmPassword"), user.getPassword());
     }
 
-    public void login(String email, String password) {
-        click(By.cssSelector(".ico-login"));
-        type(By.id("Email"), email);
-        type(By.id("Password"), password);
+    public void clickOnRegistrationButton() {
+        click(By.id("register-button"));
+    }
+
+    public void clickOnLoginLink() {
+        click(By.className("ico-login"));
+    }
+
+    public void fillLoginForm(User user) {
+        type(By.id("Email"), user.getEmail());
+        type(By.id("Password"), user.getPassword());
+    }
+
+    public void clickOnLoginButton() {
         click(By.cssSelector(".login-button"));
     }
 }

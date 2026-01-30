@@ -1,38 +1,39 @@
 package com.ganz.core;
 
 import com.ganz.fw.UserHelper;
-import io.github.bonigarcia.wdm.WebDriverManager;
+import com.ganz.fw.ItemHelper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import java.time.Duration;
 
 public class ApplicationManager {
     public WebDriver driver;
+    protected String browser;
     protected UserHelper userHelper;
-    String browser;
+    protected ItemHelper itemHelper;
 
     public ApplicationManager(String browser) {
-        this.browser = browser;
+        this.browser = (browser != null) ? browser : "chrome";
     }
 
     public void init() {
         if (browser.equalsIgnoreCase("chrome")) {
-            WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver();
         } else if (browser.equalsIgnoreCase("firefox")) {
-            WebDriverManager.firefoxdriver().setup();
             driver = new FirefoxDriver();
         } else if (browser.equalsIgnoreCase("edge")) {
-            WebDriverManager.edgedriver().setup();
             driver = new EdgeDriver();
         }
 
-        driver.get("https://demowebshop.tricentis.com/");
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        // Глобальное ожидание элементов
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.get("https://demowebshop.tricentis.com/");
+
         userHelper = new UserHelper(driver);
+        itemHelper = new ItemHelper(driver);
     }
 
     public void stop() {
@@ -41,7 +42,6 @@ public class ApplicationManager {
         }
     }
 
-    public UserHelper getUserHelper() {
-        return userHelper;
-    }
+    public UserHelper getUser() { return userHelper; }
+    public ItemHelper getItem() { return itemHelper; }
 }

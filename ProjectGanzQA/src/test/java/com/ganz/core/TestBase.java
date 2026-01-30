@@ -1,21 +1,22 @@
 package com.ganz.core;
 
-import org.openqa.selenium.remote.Browser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 public class TestBase {
-    // Читаем браузер из консоли, если не указан — берем Chrome по умолчанию
-    protected final ApplicationManager app = new ApplicationManager(
-            System.getProperty("browser", Browser.CHROME.browserName())
-    );
+    protected final ApplicationManager app = new ApplicationManager(System.getProperty("browser", "chrome"));
+    protected Logger logger = LoggerFactory.getLogger(TestBase.class);
 
     @BeforeMethod
     public void setUp() {
         app.init();
+        // Теперь переходим на главную через app
+        app.driver.get("https://demowebshop.tricentis.com/");
     }
 
-    @AfterMethod(alwaysRun = true)
+    @AfterMethod(enabled = true)
     public void tearDown() {
         app.stop();
     }
