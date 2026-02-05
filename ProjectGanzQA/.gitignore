@@ -1,15 +1,15 @@
 .gradle
-/gradle/
 build/
+out/
+screenshots/
+target/
 
 ### IntelliJ IDEA ###
-*.idea
+.idea/
 *.iws
 *.iml
 *.ipr
-out/
-settings.gradle
-gradlew.bat
-\gradlew
-gradlew
 
+### OS ###
+.DS_Store
+Thumbs.db

@@ -6,33 +6,40 @@ import org.testng.annotations.Test;
 
 public class PurchaseTests extends TestBase {
 
-    @Test
-    public void fullPurchaseFlowTest() {
-        User user = new User();
+    // Выносим создание юзера сюда, чтобы все методы видели одного и того же юзера
+    User user = new User();
 
+    @Test(priority = 1)
+    public void registrationTest() {
         logger.info("--- Шаг 1: Регистрация ---");
         app.getUser().clickOnRegistrationLink();
         app.getUser().fillRegistrationForm(user);
         app.getUser().clickOnRegistrationButton();
+    }
 
+    @Test(priority = 2, dependsOnMethods = "registrationTest")
+    public void loginTest() {
         logger.info("--- Шаг 2: Авторизация ---");
         app.getUser().clickOnLoginLink();
         app.getUser().fillLoginForm(user);
         app.getUser().clickOnLoginButton();
+    }
 
-        logger.info("--- Шаг 3: Добавление ноутбука ---");
-        // Прямой переход, чтобы кнопка Add to cart точно была на экране
+    @Test(priority = 3, dependsOnMethods = "loginTest")
+    public void addItemsTest() {
+        logger.info("--- Шаг 3 и 4: Покупки ---");
         app.getItem().openItemByUrl("https://demowebshop.tricentis.com/141-inch-laptop");
         app.getItem().addToCart();
 
-        logger.info("--- Шаг 4: Добавление джинсов ---");
         app.getItem().openItemByUrl("https://demowebshop.tricentis.com/blue-jeans");
         app.getItem().setQuantity("2");
         app.getItem().addToCart();
+    }
 
+    @Test(priority = 4, dependsOnMethods = "addItemsTest")
+    public void cartVerificationTest() {
         logger.info("--- Шаг 5: Переход в корзину ---");
         app.getItem().openShoppingCart();
-
         app.getUser().takeScreenshot();
     }
 }

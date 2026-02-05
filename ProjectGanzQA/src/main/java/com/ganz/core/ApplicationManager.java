@@ -1,7 +1,6 @@
 package com.ganz.core;
-
-import com.ganz.fw.UserHelper;
 import com.ganz.fw.ItemHelper;
+import com.ganz.fw.UserHelper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -13,41 +12,26 @@ import java.time.Duration;
 
 public class ApplicationManager {
     public WebDriver driver;
-    protected String browser;
-    protected UserHelper userHelper;
-    protected ItemHelper itemHelper;
+    UserHelper userHelper;
+    ItemHelper itemHelper;
 
-    public ApplicationManager(String browser) {
-        this.browser = (browser != null) ? browser : "chrome";
-    }
-
-    public void init() {
+    public void init(String browser, Object options) {
         if (browser.equalsIgnoreCase("chrome")) {
-            ChromeOptions options = new ChromeOptions();
-            options.addArguments("--headless"); // Запуск без графического окна
-            options.addArguments("--no-sandbox"); // Нужно для работы в Docker/Linux
-            options.addArguments("--disable-dev-shm-usage"); // Решает проблему нехватки памяти в контейнере
-            options.addArguments("--window-size=1920,1080"); // Задаем размер окна, так как GUI нет
-            driver = new ChromeDriver(options);
-
+            driver = new ChromeDriver((ChromeOptions) options);
         } else if (browser.equalsIgnoreCase("firefox")) {
-            FirefoxOptions options = new FirefoxOptions();
-            options.addArguments("--headless");
-            driver = new FirefoxDriver(options);
-
+            driver = new FirefoxDriver((FirefoxOptions) options);
         } else if (browser.equalsIgnoreCase("edge")) {
-            EdgeOptions options = new EdgeOptions();
-            options.addArguments("--headless");
-            driver = new EdgeDriver(options);
+            driver = new EdgeDriver((EdgeOptions) options);
         }
 
-        // В headless-режиме лучше не использовать maximize(),
-        // размер окна мы уже задали выше в настройках ChromeOptions
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.get("https://demowebshop.tricentis.com/");
+        if (driver != null) {
+            driver.get("https://demowebshop.tricentis.com/");
+            driver.manage().window().maximize();
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 
-        userHelper = new UserHelper(driver);
-        itemHelper = new ItemHelper(driver);
+            userHelper = new UserHelper(driver);
+            itemHelper = new ItemHelper(driver);
+        }
     }
 
     public void stop() {
@@ -56,6 +40,11 @@ public class ApplicationManager {
         }
     }
 
-    public UserHelper getUser() { return userHelper; }
-    public ItemHelper getItem() { return itemHelper; }
+    public UserHelper getUser() {
+        return userHelper;
+    }
+
+    public ItemHelper getItem() {
+        return itemHelper;
+    }
 }

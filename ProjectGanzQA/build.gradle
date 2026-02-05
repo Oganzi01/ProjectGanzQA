@@ -13,10 +13,10 @@ dependencies {
     // Драйверы для браузеров
     implementation 'io.github.bonigarcia:webdrivermanager:5.9.2'
 
-    // Selenium (нужен в основном коде для хелперов)
+    // Selenium
     implementation 'org.seleniumhq.selenium:selenium-java:4.21.0'
 
-    // TestNG (теперь правильно — для папки src/test)
+    // TestNG
     testImplementation 'org.testng:testng:7.10.2'
 
     // Блок логирования (Лесоруб)
@@ -27,16 +27,22 @@ dependencies {
 
 test {
     useTestNG()
+    // ВАЖНО: передаем метку Гитхаба внутрь тестов
+    systemProperty "GITHUB_ACTIONS", System.getenv("GITHUB_ACTIONS")
+
     testLogging {
         showStandardStreams = true
+        events "passed", "skipped", "failed"
         exceptionFormat = 'full'
     }
 }
 
-// Задача для запуска через терминал (если понадобится)
+// Задача для запуска через терминал
 task qa(type: Test) {
     group = 'verification'
     useTestNG()
     outputs.upToDateWhen { false }
+    // И здесь тоже прокидываем переменные
+    systemProperty "GITHUB_ACTIONS", System.getenv("GITHUB_ACTIONS")
     systemProperty "browser", System.getProperty("browser", "chrome")
 }
