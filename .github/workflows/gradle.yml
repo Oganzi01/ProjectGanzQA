@@ -23,7 +23,7 @@ jobs:
       uses: gradle/actions/setup-gradle@v3
 
     - name: Run Purchase Tests
-      # Добавляем переход в нужную папку, так как у тебя проект лежит внутри ProjectGanzQA
+      
       run: |
         cd ProjectGanzQA
         chmod +x gradlew
