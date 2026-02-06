@@ -1,6 +1,6 @@
 package com.ganz.fw;
 
-import com.ganz.core.BaseHelper; // ЭТА СТРОКА УБЕРЕТ КРАСНЫЙ ЦВЕТ
+import com.ganz.core.BaseHelper; 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
