@@ -11,7 +11,7 @@ public class ItemHelper extends BaseHelper {
 
     public void openItemByUrl(String itemUrl) {
         driver.get(itemUrl);
-        // Небольшая пауза, чтобы JS на странице успел отработать
+       
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
