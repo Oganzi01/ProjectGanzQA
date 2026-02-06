@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 
 public class PurchaseTests extends TestBase {
 
-    // Выносим создание юзера сюда, чтобы все методы видели одного и того же юзера
+    
     User user = new User();
 
     @Test(priority = 1)
