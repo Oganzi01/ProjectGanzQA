@@ -16,10 +16,10 @@ public class TestBase {
 
     @BeforeMethod
     public void setUp() {
-        // Читаем браузер из командной строки Gradle (-Dbrowser=...) или берем chrome по умолчанию
+        
         String browser = System.getProperty("browser", "chrome");
 
-        // Проверяем, запущены ли мы в GitHub Actions (там нужен безголовый режим)
+        
         boolean isHeadless = System.getProperty("GITHUB_ACTIONS") != null;
 
         logger.info("Запуск тестов в браузере: " + browser + (isHeadless ? " [Headless Mode]" : ""));
