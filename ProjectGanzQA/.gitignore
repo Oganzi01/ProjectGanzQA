@@ -9,7 +9,7 @@ target/
 *.iws
 *.iml
 *.ipr
-
+*.log
 ### OS ###
 .DS_Store
 Thumbs.db
