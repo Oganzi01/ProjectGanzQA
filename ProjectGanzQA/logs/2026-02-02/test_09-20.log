@@ -1,0 +1,22 @@
+2026-02-02 09:20:33.202 [Test worker] INFO  com.ganz.core.TestBase - --- Шаг 1: Регистрация ---
+2026-02-02 09:20:33.213 [Test worker] INFO  com.ganz.core.BaseHelper - Клик по элементу: By.className: ico-register
+2026-02-02 09:20:33.664 [Test worker] INFO  com.ganz.core.BaseHelper - Клик по элементу: By.id: gender-male
+2026-02-02 09:20:33.760 [Test worker] INFO  com.ganz.core.BaseHelper - Клик по элементу: By.id: FirstName
+2026-02-02 09:20:33.897 [Test worker] INFO  com.ganz.core.BaseHelper - Клик по элементу: By.id: LastName
+2026-02-02 09:20:34.029 [Test worker] INFO  com.ganz.core.BaseHelper - Клик по элементу: By.id: Email
+2026-02-02 09:20:34.175 [Test worker] INFO  com.ganz.core.BaseHelper - Клик по элементу: By.id: Password
+2026-02-02 09:20:34.307 [Test worker] INFO  com.ganz.core.BaseHelper - Клик по элементу: By.id: ConfirmPassword
+2026-02-02 09:20:34.512 [Test worker] INFO  com.ganz.core.BaseHelper - Клик по элементу: By.id: register-button
+2026-02-02 09:20:35.010 [Test worker] INFO  com.ganz.core.TestBase - --- Шаг 2: Авторизация ---
+2026-02-02 09:20:35.010 [Test worker] INFO  com.ganz.core.BaseHelper - Клик по элементу: By.className: ico-login
+2026-02-02 09:20:35.374 [Test worker] INFO  com.ganz.core.BaseHelper - Клик по элементу: By.id: Email
+2026-02-02 09:20:35.555 [Test worker] INFO  com.ganz.core.BaseHelper - Клик по элементу: By.id: Password
+2026-02-02 09:20:35.702 [Test worker] INFO  com.ganz.core.BaseHelper - Клик по элементу: By.cssSelector: .login-button
+2026-02-02 09:20:36.164 [Test worker] INFO  com.ganz.core.TestBase - --- Шаг 3: Добавление ноутбука ---
+2026-02-02 09:20:38.225 [Test worker] INFO  com.ganz.core.BaseHelper - Клик по элементу: By.cssSelector: .add-to-cart-button
+2026-02-02 09:20:38.332 [Test worker] INFO  com.ganz.core.TestBase - --- Шаг 4: Добавление джинсов ---
+2026-02-02 09:20:40.710 [Test worker] INFO  com.ganz.core.BaseHelper - Клик по элементу: By.className: qty-input
+2026-02-02 09:20:40.875 [Test worker] INFO  com.ganz.core.BaseHelper - Клик по элементу: By.cssSelector: .add-to-cart-button
+2026-02-02 09:20:40.964 [Test worker] INFO  com.ganz.core.TestBase - --- Шаг 5: Переход в корзину ---
+2026-02-02 09:20:40.964 [Test worker] INFO  com.ganz.core.BaseHelper - Клик по элементу: By.className: ico-cart
+2026-02-02 09:20:41.597 [Test worker] INFO  com.ganz.core.BaseHelper - Скриншот сделан и сохранен: screenshots\screen-1770020441557.png

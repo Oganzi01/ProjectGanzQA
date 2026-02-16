@@ -1,0 +1,4 @@
+2026-02-16 19:24:37.512 [Test worker] INFO  com.ganz.core.TestBase - --- Шаг 3: Добавление в корзину ---
+2026-02-16 19:24:39.684 [Test worker] INFO  com.ganz.core.TestBase - --- Шаг 4: Проверка корзины ---
+2026-02-16 19:24:41.979 [Test worker] INFO  com.ganz.core.TestBase - --- Шаг 2: Логин ---
+2026-02-16 19:24:44.257 [Test worker] INFO  com.ganz.core.TestBase - --- Шаг 1: Регистрация ---
