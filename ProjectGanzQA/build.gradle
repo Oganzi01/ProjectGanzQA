@@ -2,7 +2,7 @@ plugins {
     id 'java'
 }
 
-group = 'org.ganz'
+group = 'com.ganz'
 version = '1.0-SNAPSHOT'
 
 repositories {
@@ -10,39 +10,21 @@ repositories {
 }
 
 dependencies {
-    // Драйверы для браузеров
-    implementation 'io.github.bonigarcia:webdrivermanager:5.9.2'
-
-    // Selenium
     implementation 'org.seleniumhq.selenium:selenium-java:4.21.0'
-
-    // TestNG
-    testImplementation 'org.testng:testng:7.10.2'
-
-    // Блок логирования (Лесоруб)
-    implementation 'org.slf4j:slf4j-api:2.0.9'
-    implementation 'ch.qos.logback:logback-classic:1.4.11'
-    implementation 'ch.qos.logback:logback-core:1.4.11'
+    implementation 'org.testng:testng:7.10.2'
+    implementation 'org.slf4j:slf4j-api:2.0.13'
+    implementation 'ch.qos.logback:logback-classic:1.5.6'
 }
 
 test {
     useTestNG()
-    // ВАЖНО: передаем метку Гитхаба внутрь тестов
-    systemProperty "GITHUB_ACTIONS", System.getenv("GITHUB_ACTIONS")
+
 
     testLogging {
-        showStandardStreams = true
         events "passed", "skipped", "failed"
-        exceptionFormat = 'full'
+        exceptionFormat "full"
+        showExceptions true
+        showCauses true
+        showStackTraces true
     }
-}
-
-// Задача для запуска через терминал
-task qa(type: Test) {
-    group = 'verification'
-    useTestNG()
-    outputs.upToDateWhen { false }
-    // И здесь тоже прокидываем переменные
-    systemProperty "GITHUB_ACTIONS", System.getenv("GITHUB_ACTIONS")
-    systemProperty "browser", System.getProperty("browser", "chrome")
 }
