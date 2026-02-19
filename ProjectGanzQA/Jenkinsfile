@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+
+                git url: 'https://github.com/Oganzi01/ProjectGanzQA.git', branch: 'master'
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                script {
+
+                    sh 'chmod +x gradlew'
+                    sh './gradlew test'
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+
+            junit '**/build/test-results/test/*.xml'
+        }
+    }
+}
