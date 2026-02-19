@@ -1,7 +1,7 @@
 package com.ganz.core;
 
-import com.ganz.fw.ItemHelper; // Добавил импорт на основе скриншота
-import com.ganz.fw.UserHelper; // Добавил импорт на основе скриншота
+import com.ganz.fw.ItemHelper;
+import com.ganz.fw.UserHelper;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -16,7 +16,7 @@ public class ApplicationManager {
     public void init() {
         ChromeOptions options = new ChromeOptions();
 
-        // Настройки для Jenkins/Docker
+        // Настройки для Jenkins/Docker (Headless режим)
         options.addArguments("--headless");
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
@@ -26,9 +26,10 @@ public class ApplicationManager {
         driver = new ChromeDriver(options);
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
         driver.get("https://demowebshop.tricentis.com/");
 
-        // Инициализация твоих хелперов
+
         userHelper = new UserHelper(driver);
         itemHelper = new ItemHelper(driver);
     }

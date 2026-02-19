@@ -8,12 +8,13 @@ public class TestBase {
 
     @BeforeMethod
     public void setUp() {
-
+        // Запуск инициализации браузера перед каждым тестом
         app.init();
     }
 
     @AfterMethod(alwaysRun = true)
     public void tearDown() {
+        // Закрытие браузера после теста
         app.stop();
     }
 }

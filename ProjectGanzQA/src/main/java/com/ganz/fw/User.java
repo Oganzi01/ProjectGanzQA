@@ -1,27 +1,19 @@
 package com.ganz.fw;
 
 public class User {
-    
-    private String firstName = "Oleg";
-    private String lastName = "Ganz";
-    private String email = "ganz@gmail.com";
-    private String password = "Oleg1243";
+    private String name;
+    private String email;
+    private String password;
 
-   
-    public String getFirstName() { return firstName; }
-    public String getLastName() { return lastName; }
+    // Добавляем конструктор, который принимает 3 параметра
+    public User(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
+
+    // Геттеры для доступа к данным
+    public String getName() { return name; }
     public String getEmail() { return email; }
     public String getPassword() { return password; }
-
-    
-    public User withFirstName(String firstName) { this.firstName = firstName; return this; }
-    public User withLastName(String lastName) { this.lastName = lastName; return this; }
-    public User withEmail(String email) { this.email = email; return this; }
-    public User withPassword(String password) { this.password = password; return this; }
-
-    
-    public void setFirstName(String firstName) { this.firstName = firstName; }
-    public void setLastName(String lastName) { this.lastName = lastName; }
-    public void setEmail(String email) { this.email = email; }
-    public void setPassword(String password) { this.password = password; }
 }
